@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="BulletData" format=3 uid="uid://dlb8yu7ebg6bt"]
+
+[ext_resource type="Script" uid="uid://b6n52i210hr86" path="res://bullet_data.gd" id="1_skw5j"]
+
+[resource]
+script = ExtResource("1_skw5j")
+speed = 400
+damage = 1
+bounces = 1
+color = Color(0.7262233, 3.4172833e-06, 5.7756904e-07, 1)

@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://dkbicbxlra0x"]
+
+[node name="GameMenu" type="Node2D" unique_id=2087174503]
+
+[node name="Control" type="Control" parent="." unique_id=1656248071]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control" unique_id=960986193]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Header" type="Label" parent="Control/VBoxContainer" unique_id=711426037]
+layout_mode = 2
+text = "Ship Selection"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/VBoxContainer" unique_id=869163111]
+layout_mode = 2
+
+[node name="WarbirdButton" type="Button" parent="Control/VBoxContainer/HBoxContainer" unique_id=128298939]
+layout_mode = 2
+text = "Warbird"
+
+[node name="JavelinButton" type="Button" parent="Control/VBoxContainer/HBoxContainer" unique_id=588668894]
+layout_mode = 2
+text = "Javelin"
+
+[node name="SpiderButton" type="Button" parent="Control/VBoxContainer/HBoxContainer" unique_id=1692120592]
+layout_mode = 2
+text = "Spider"
+
+[node name="LeviathanButton" type="Button" parent="Control/VBoxContainer/HBoxContainer" unique_id=1799737372]
+layout_mode = 2
+text = "Leviathan"
+
+[node name="TerrierButton" type="Button" parent="Control/VBoxContainer/HBoxContainer" unique_id=414407630]
+layout_mode = 2
+text = "Terrier"

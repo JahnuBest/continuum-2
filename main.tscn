@@ -1,0 +1,129 @@
+[gd_scene format=4 uid="uid://cpyclhukikrv4"]
+
+[ext_resource type="Script" uid="uid://gm6nw3wamq6h" path="res://main.gd" id="1_h2yge"]
+[ext_resource type="PackedScene" uid="uid://clbdg8hd7dx5c" path="res://ship.tscn" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://bgvse6whtn5j8" path="res://wall.tscn" id="2_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://bo2hg1dik3dwe" path="res://bullet.tscn" id="2_272bh"]
+[ext_resource type="Script" uid="uid://cp40iwk3dj5w3" path="res://health_bar.gd" id="5_7mycd"]
+[ext_resource type="PackedScene" uid="uid://r36bdcykw8tb" path="res://flag.tscn" id="5_lquwl"]
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_7mycd"]
+scenes/1/scene = ExtResource("5_lquwl")
+
+[sub_resource type="TileSet" id="TileSet_272bh"]
+sources/0 = SubResource("TileSetScenesCollectionSource_7mycd")
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_h2yge"]
+scenes/1/scene = ExtResource("2_0xm2m")
+
+[sub_resource type="TileSet" id="TileSet_1bvp3"]
+sources/0 = SubResource("TileSetScenesCollectionSource_h2yge")
+
+[sub_resource type="GDScript" id="GDScript_1bvp3"]
+script/source = "extends Camera2D
+
+var player : Node2D
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+"
+
+[sub_resource type="Curve2D" id="Curve2D_7mycd"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 257, 238, 0, 0, 0, 0, 453, 171, 0, 0, 0, 0, 691, 167, 0, 0, 0, 0, 931, 216, 0, 0, 0, 0, 972, 343, 0, 0, 0, 0, 876, 404, 0, 0, 0, 0, 732, 488, 0, 0, 0, 0, 578, 520, 0, 0, 0, 0, 442, 458, 0, 0, 0, 0, 309, 439, 0, 0, 0, 0, 206, 427, 0, 0, 0, 0, 212, 289, 0, 0, 0, 0, 257, 238)
+}
+point_count = 13
+
+[node name="Main" type="Node2D" unique_id=597670035]
+script = ExtResource("1_h2yge")
+test_weapons_scene = ExtResource("2_272bh")
+
+[node name="FlagTileMap" type="TileMapLayer" parent="." unique_id=2052122877]
+tile_map_data = PackedByteArray("AAAYABcAAAAAAAAAAQAqABEAAAAAAAAAAQAdAAwAAAAAAAAAAQARABEAAAAAAAAAAQAwABoAAAAAAAAAAQA5ABMAAAAAAAAAAQA=")
+tile_set = SubResource("TileSet_272bh")
+
+[node name="WallTileMap" type="TileMapLayer" parent="." unique_id=1119567615]
+tile_map_data = PackedByteArray("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")
+tile_set = SubResource("TileSet_1bvp3")
+
+[node name="Ship" parent="." unique_id=1351159427 instance=ExtResource("1_ig7tw")]
+position = Vector2(539, 328)
+
+[node name="MainCamera" type="Camera2D" parent="." unique_id=579497745]
+position = Vector2(853, 241)
+script = SubResource("GDScript_1bvp3")
+
+[node name="MainUI" type="Control" parent="MainCamera" unique_id=41241802]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HealthBar" type="ColorRect" parent="MainCamera/MainUI" unique_id=154542040]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -200.0
+offset_top = -300.0
+offset_right = 200.0
+offset_bottom = -295.0
+grow_horizontal = 2
+color = Color(0, 1, 0, 1)
+script = ExtResource("5_7mycd")
+
+[node name="VelocityLabel" type="Label" parent="MainCamera/MainUI" unique_id=1492038766]
+layout_mode = 0
+offset_left = -551.0
+offset_top = -301.0
+offset_right = -471.0
+offset_bottom = -278.0
+size_flags_vertical = 0
+text = "Velocity: "
+
+[node name="PositionLabel" type="Label" parent="MainCamera/MainUI" unique_id=517450371]
+layout_mode = 0
+offset_left = -551.0
+offset_top = -278.435
+offset_right = -469.0
+offset_bottom = -255.435
+size_flags_vertical = 0
+text = "Position: "
+
+[node name="HealthLabel" type="Label" parent="MainCamera/MainUI" unique_id=1777604727]
+layout_mode = 0
+offset_left = 462.0
+offset_top = -294.0
+offset_right = 553.0
+offset_bottom = -267.0
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 22
+text = "Health: "
+
+[node name="FPSLabel" type="Label" parent="MainCamera/MainUI" unique_id=1649812622]
+layout_mode = 0
+offset_left = 492.0
+offset_top = 281.0
+offset_right = 559.0
+offset_bottom = 309.5
+text = "FPS: "
+vertical_alignment = 1
+
+[node name="TestWeapons" type="Path2D" parent="." unique_id=1182915021]
+visible = false
+curve = SubResource("Curve2D_7mycd")
+
+[node name="TestWeaponsLocation" type="PathFollow2D" parent="TestWeapons" unique_id=667164852]
+position = Vector2(257, 238)
+rotation = -0.32938397
+
+[node name="TestWeaponsTimer" type="Timer" parent="TestWeapons" unique_id=1682458590]
+wait_time = 0.25
+
+[connection signal="timeout" from="TestWeapons/TestWeaponsTimer" to="." method="_on_test_weapons_timer_timeout"]

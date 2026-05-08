@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://clbdg8hd7dx5c"]
+
+[ext_resource type="Script" uid="uid://y5sfglwtxtk4" path="res://ship.gd" id="1_l3rv8"]
+[ext_resource type="Script" uid="uid://bl61r8xibwjeq" path="res://ship_body.gd" id="2_4cq66"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l3rv8"]
+size = Vector2(19, 19)
+
+[node name="Ship" type="Node2D" unique_id=970917370]
+script = ExtResource("1_l3rv8")
+
+[node name="ShipBody" type="CharacterBody2D" parent="." unique_id=1093307768 groups=["ships"]]
+collision_mask = 22
+script = ExtResource("2_4cq66")
+
+[node name="Polygon2D" type="Polygon2D" parent="ShipBody" unique_id=471209604]
+position = Vector2(1.8101311, 1.6459069)
+scale = Vector2(1.1952839, 0.869452)
+color = Color(0.7561496, 0.28941292, 0.4939251, 1)
+polygon = PackedVector2Array(-9.043986, 8.458309, -9.043986, -5.343489, -1.5143943, -12.244389, 5.1785765, -5.343489, 6.0151978, 8.458309)
+uv = PackedVector2Array(-340, 16, -318, -61, -281, -79, -251, -60, -241, 14)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ShipBody" unique_id=1163639508]
+position = Vector2(0, -1.1920929e-07)
+scale = Vector2(1, 1.0000001)
+shape = SubResource("RectangleShape2D_l3rv8")
+
+[node name="NameTag" type="Label" parent="." unique_id=1354808655]
+offset_left = 10.0
+offset_top = -2.0
+offset_right = 76.0
+offset_bottom = 21.0
+text = "Janauski"

@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://bo2hg1dik3dwe"]
+
+[ext_resource type="Script" uid="uid://5dftgmp313sr" path="res://bullet.gd" id="1_v7oki"]
+[ext_resource type="Script" uid="uid://rluvb22sp8qy" path="res://bullet_body.gd" id="2_v8qja"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v7oki"]
+size = Vector2(15, 15)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_v7oki"]
+radius = 6.0207973
+
+[node name="Bullet" type="Node2D" unique_id=904325436]
+script = ExtResource("1_v7oki")
+
+[node name="BulletBody" type="CharacterBody2D" parent="." unique_id=984800850]
+collision_layer = 8
+collision_mask = 2
+script = ExtResource("2_v8qja")
+
+[node name="BulletArea" type="Area2D" parent="BulletBody" unique_id=17153828]
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BulletBody/BulletArea" unique_id=1210004869]
+shape = SubResource("RectangleShape2D_v7oki")
+
+[node name="BulletCollision" type="CollisionShape2D" parent="BulletBody" unique_id=348768918]
+position = Vector2(0, -0.5)
+shape = SubResource("CircleShape2D_v7oki")
+
+[node name="BulletShape" type="Polygon2D" parent="BulletBody" unique_id=1094328000]
+position = Vector2(-2, 3)
+color = Color(0.8352376, 8.1822276e-07, 0.48119313, 1)
+polygon = PackedVector2Array(-2.8841705, -0.13562775, -1.4992676, -6.8623447, 1.8641052, -9.632169, 5.0296173, -7.4558783, 6.6123657, -0.3334732, 4.2382355, 1.8428192, 0, 2)
+uv = PackedVector2Array(-2.8841705, -0.13562775, -1.4992676, -6.8623447, 1.8641052, -9.632169, 5.0296173, -7.4558783, 6.6123657, -0.3334732, 4.2382355, 1.8428192, 0.8748779, 2.0406628)
+
+[connection signal="body_entered" from="BulletBody/BulletArea" to="." method="_on_body_entered"]
