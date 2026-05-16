@@ -1,10 +1,10 @@
 [gd_scene format=4 uid="uid://cpyclhukikrv4"]
 
 [ext_resource type="Script" uid="uid://gm6nw3wamq6h" path="res://main.gd" id="1_h2yge"]
-[ext_resource type="PackedScene" uid="uid://clbdg8hd7dx5c" path="res://ship.tscn" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://clbdg8hd7dx5c" path="res://ship_data/ship.tscn" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://bgvse6whtn5j8" path="res://wall.tscn" id="2_0xm2m"]
-[ext_resource type="PackedScene" uid="uid://bo2hg1dik3dwe" path="res://bullet.tscn" id="2_272bh"]
-[ext_resource type="Script" uid="uid://cp40iwk3dj5w3" path="res://health_bar.gd" id="5_7mycd"]
+[ext_resource type="PackedScene" uid="uid://bo2hg1dik3dwe" path="res://ship_data/bullets/bullet.tscn" id="2_272bh"]
+[ext_resource type="Script" uid="uid://cp40iwk3dj5w3" path="res://ship_data/health_bar.gd" id="5_7mycd"]
 [ext_resource type="PackedScene" uid="uid://r36bdcykw8tb" path="res://flag.tscn" id="5_lquwl"]
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_7mycd"]

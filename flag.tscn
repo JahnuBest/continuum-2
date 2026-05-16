@@ -81,7 +81,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"default",
-"speed": 15.0
+"speed": 20.0
 }]
 
 [node name="Flag" type="StaticBody2D" unique_id=1895996896]

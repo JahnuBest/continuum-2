@@ -9,9 +9,9 @@ extends Node2D
 
 @export var test_weapons_scene: PackedScene
 
-var current_bullet_data := preload("res://bulletData/default_bullet.tres")
-var current_bomb_data := preload("res://bulletData/default_bomb.tres")
-var current_mine_data := preload("res://bulletData/default_mine.tres")
+var current_bullet_data := preload("res://ship_data/bullets/bulletData/default_bullet.tres")
+var current_bomb_data := preload("res://ship_data/bullets/bulletData/default_bomb.tres")
+var current_mine_data := preload("res://ship_data/bullets/bulletData/default_mine.tres")
 
 func _ready() -> void:
 	return
@@ -25,7 +25,7 @@ func _process(delta: float) -> void:
 	healthLabel.text = str(int($Ship/ShipBody.health))
 	fpsLabel.text = "FPS: " + str(int(Performance.get_monitor(Performance.TIME_FPS)))
 	positionLabel.text = "Position: " + str(Vector2i($Ship/ShipBody.position))
-	healthBar.set_health_bar_width($Ship/ShipBody.health, $Ship/ShipBody.max_health)
+	healthBar.set_health_bar_width($Ship/ShipBody.health, $Ship/ShipBody.max_health, delta)
 
 
 func _on_test_weapons_timer_timeout() -> void:

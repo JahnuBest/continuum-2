@@ -20,17 +20,45 @@ var health_boost_discharge_rate = 200
 var flags := 0
 var team = 0
 
-var Bullet := preload("res://bullet.tscn")
+var Bullet := preload("res://ship_data/bullets/bullet.tscn")
+var Repel := preload("res://ship_data/repel/repel.tscn")
+var Warp := preload("res://ship_data/warp/warp.tscn")
 # TODO: Export this later?
-var current_bullet_data := preload("res://bulletData/default_bullet.tres")
-var current_bomb_data := preload("res://bulletData/default_bomb.tres")
-var current_mine_data := preload("res://bulletData/default_mine.tres")
+var current_bullet_data := preload("res://ship_data/bullets/bulletData/default_bullet.tres")
+var current_bomb_data := preload("res://ship_data/bullets/bulletData/default_bomb.tres")
+var current_mine_data := preload("res://ship_data/bullets/bulletData/default_mine.tres")
 
 func _physics_process(delta: float) -> void:
-	# Special buttons check
-	if Input.is_action_just_pressed("shipwarp"):
+	# Ships can only take one action at a time.
+	# E.g. shoot, warp, repel, etc.
+	# Boost is unavoidable... I think.
+	
+	if Input.is_action_just_pressed("shipwarp") and health == max_health:
 		# TODO: Should be a random spot in safe zone
+		var warp = Warp.instantiate()
+		warp.position = position
+		warp.z_index = -1
+		get_parent().add_child(warp)
 		position = Vector2(0,0)
+		health = 1
+	
+	elif Input.is_action_just_pressed("repel"):
+		var repel = Repel.instantiate()
+		repel.position = position
+		repel.z_index = -1
+		get_parent().add_child(repel)
+		
+	# Shoot checks
+	elif Input.is_action_just_pressed("mine"):
+		shoot(current_mine_data, false)
+	
+	elif Input.is_action_just_pressed("bullet"):
+		shoot(current_bullet_data)
+		health -= 100
+	
+	elif Input.is_action_just_pressed("bomb"):
+		shoot(current_bomb_data)	
+		health -= 200
 	
 	if Input.is_action_pressed("left"): rotation -= turn_speed * delta
 	elif Input.is_action_pressed("right"): rotation += turn_speed * delta
@@ -59,20 +87,11 @@ func _physics_process(delta: float) -> void:
 		if collider.collision_layer == 4:		# Flags
 			flags += 1
 			collision_info.get_collider().queue_free()
-			health = min(base_health + 100, health + 100)
 			max_health = base_health + (flags * 100)
 		elif collider.collision_layer == 2:		# Walls
 			velocity = velocity.bounce(collision_info.get_normal())
 			
-	# Shoot checks
-	if Input.is_action_just_pressed("mine"):
-		shoot(current_mine_data, false)
 	
-	elif Input.is_action_just_pressed("bullet"):
-		shoot(current_bullet_data)
-	
-	elif Input.is_action_just_pressed("bomb"):
-		shoot(current_bomb_data)	
 
 func shoot(bullet_data:BulletData, use_ship_momentum:=true) -> void:
 	#print("spawned bullet")
