@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://1e45h8rh4xam"]
+
+[ext_resource type="Script" uid="uid://clbso6onv1ysy" path="res://chat.gd" id="1_dg5i7"]
+
+[node name="Chat" type="Control" unique_id=2043146575]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_dg5i7")
+
+[node name="ChatList" type="VBoxContainer" parent="." unique_id=2013975250]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/separation = 1
+
+[node name="Label" type="Label" parent="ChatList" unique_id=1782858079]
+layout_mode = 2
+text = "Test1"
+
+[node name="Label2" type="Label" parent="ChatList" unique_id=1243879378]
+layout_mode = 2
+text = "Test2"
+
+[node name="Label5" type="Label" parent="ChatList" unique_id=742141873]
+layout_mode = 2
+text = "tsf"
+
+[node name="Label3" type="Label" parent="ChatList" unique_id=1293242187]
+layout_mode = 2
+text = "fwef"
+
+[node name="Label4" type="Label" parent="ChatList" unique_id=1226563640]
+layout_mode = 2
+text = "wefewf"
+
+[node name="LineEdit" type="LineEdit" parent="ChatList" unique_id=620891042]
+visible = false
+layout_mode = 2
+selecting_enabled = false

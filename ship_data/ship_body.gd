@@ -14,7 +14,7 @@ var turn_speed = 3.0
 var max_health = 1200
 var base_health = 1200
 var health = 1200
-var health_recharge_rate = 50
+var health_recharge_rate = 100
 var health_boost_discharge_rate = 200
 
 var flags := 0
@@ -32,55 +32,58 @@ func _physics_process(delta: float) -> void:
 	# Ships can only take one action at a time.
 	# E.g. shoot, warp, repel, etc.
 	# Boost is unavoidable... I think.
-	
-	if Input.is_action_just_pressed("shipwarp") and health == max_health:
-		# TODO: Should be a random spot in safe zone
-		var warp = Warp.instantiate()
-		warp.position = position
-		warp.z_index = -1
-		get_parent().add_child(warp)
-		position = Vector2(0,0)
-		health = 1
-	
-	elif Input.is_action_just_pressed("repel"):
-		var repel = Repel.instantiate()
-		repel.position = position
-		repel.z_index = -1
-		get_parent().add_child(repel)
+	if not Globals.chat_open:
+		if Input.is_action_just_pressed("shipwarp") and health == max_health:
+			# TODO: Should be a random spot in safe zone
+			var warp = Warp.instantiate()
+			warp.position = position
+			warp.z_index = -1
+			get_parent().add_child(warp)
+			position = Vector2(0,0)
+			health = 1
 		
-	# Shoot checks
-	elif Input.is_action_just_pressed("mine"):
-		shoot(current_mine_data, false)
-	
-	elif Input.is_action_just_pressed("bullet"):
-		shoot(current_bullet_data)
-		health -= 100
-	
-	elif Input.is_action_just_pressed("bomb"):
-		shoot(current_bomb_data)	
-		health -= 200
-	
-	if Input.is_action_pressed("left"): rotation -= turn_speed * delta
-	elif Input.is_action_pressed("right"): rotation += turn_speed * delta
-	
-	if Input.is_action_pressed("boost"):
-		max_velocity = max_boost_velocity
-		accel = boost_accel
-		health = max(health - health_boost_discharge_rate * delta, 0)
-	else:
-		max_velocity = max_normal_velocity
-		health = min(health + health_recharge_rate * delta, max_health)
-		accel = normal_accel
-	
-	if velocity.x > max_velocity or velocity.y > max_velocity:
-		velocity = velocity.move_toward(Vector2.ZERO, decel * delta * 4)
+		elif Input.is_action_just_pressed("repel"):
+			var repel = Repel.instantiate()
+			repel.position = position
+			repel.z_index = -1
+			get_parent().add_child(repel)
+			
+		# Shoot checks
+		elif Input.is_action_just_pressed("mine"):
+			shoot(current_mine_data, false)
 		
-	if Input.is_action_pressed("forward"):
-		velocity = velocity.move_toward(Vector2.UP.rotated(rotation) * max_velocity, accel * delta)
-	elif Input.is_action_pressed("backward"):
-		velocity = velocity.move_toward(Vector2.UP.rotated(rotation) * -max_velocity, accel * delta)
-	else: velocity = velocity.move_toward(Vector2.ZERO, decel * delta)
-	#position += velocity * delta
+		elif Input.is_action_just_pressed("bullet"):
+			shoot(current_bullet_data)
+			health -= 100
+		
+		elif Input.is_action_just_pressed("bomb"):
+			shoot(current_bomb_data)	
+			health -= 200
+		
+		# TODO: Think about using all sprite anims
+		if Input.is_action_pressed("left"): rotation -= turn_speed * delta
+		elif Input.is_action_pressed("right"): rotation += turn_speed * delta
+		
+		if Input.is_action_pressed("boost"):
+			max_velocity = max_boost_velocity
+			accel = boost_accel
+			health = max(health - health_boost_discharge_rate * delta, 0)
+		else:
+			max_velocity = max_normal_velocity
+			health = min(health + health_recharge_rate * delta, max_health)
+			accel = normal_accel
+		
+		if velocity.x > max_velocity or velocity.y > max_velocity:
+			velocity = velocity.move_toward(Vector2.ZERO, decel * delta * 4)
+			
+		if Input.is_action_pressed("forward"):
+			velocity = velocity.move_toward(Vector2.UP.rotated(rotation) * max_velocity, accel * delta)
+		elif Input.is_action_pressed("backward"):
+			velocity = velocity.move_toward(Vector2.UP.rotated(rotation) * -max_velocity, accel * delta)
+		else: velocity = velocity.move_toward(Vector2.ZERO, decel * delta)
+		#position += velocity * delta
+	
+	# This is the only code that runs if chat_mode = true.
 	var collision_info = move_and_collide(velocity * delta)
 	if collision_info: 
 		var collider = collision_info.get_collider()
@@ -91,8 +94,7 @@ func _physics_process(delta: float) -> void:
 		elif collider.collision_layer == 2:		# Walls
 			velocity = velocity.bounce(collision_info.get_normal())
 			
-	
-
+			
 func shoot(bullet_data:BulletData, use_ship_momentum:=true) -> void:
 	#print("spawned bullet")
 	var spawned_bullet = Bullet.instantiate()

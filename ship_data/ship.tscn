@@ -2,9 +2,25 @@
 
 [ext_resource type="Script" uid="uid://y5sfglwtxtk4" path="res://ship_data/ship.gd" id="1_l3rv8"]
 [ext_resource type="Script" uid="uid://bl61r8xibwjeq" path="res://ship_data/ship_body.gd" id="2_4cq66"]
+[ext_resource type="Texture2D" uid="uid://bu2pjym1bb47d" path="res://sprites/ships.png" id="3_8idyj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l3rv8"]
-size = Vector2(19, 19)
+size = Vector2(30, 30.999996)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rvwkg"]
+atlas = ExtResource("3_8idyj")
+region = Rect2(0, 0, 36, 36)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qp65w"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rvwkg")
+}],
+"loop": false,
+"name": &"warbird",
+"speed": 20.0
+}]
 
 [node name="Ship" type="Node2D" unique_id=970917370]
 z_index = 1
@@ -15,6 +31,7 @@ collision_mask = 22
 script = ExtResource("2_4cq66")
 
 [node name="Polygon2D" type="Polygon2D" parent="ShipBody" unique_id=471209604]
+visible = false
 position = Vector2(1.8101311, 1.6459069)
 scale = Vector2(1.1952839, 0.869452)
 color = Color(0.7561496, 0.28941292, 0.4939251, 1)
@@ -22,9 +39,13 @@ polygon = PackedVector2Array(-9.043986, 8.458309, -9.043986, -5.343489, -1.51439
 uv = PackedVector2Array(-340, 16, -318, -61, -281, -79, -251, -60, -241, 14)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ShipBody" unique_id=1163639508]
-position = Vector2(0, -1.1920929e-07)
+position = Vector2(0, 0.50000036)
 scale = Vector2(1, 1.0000001)
 shape = SubResource("RectangleShape2D_l3rv8")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ShipBody" unique_id=1145997847]
+sprite_frames = SubResource("SpriteFrames_qp65w")
+animation = &"warbird"
 
 [node name="NameTag" type="Label" parent="." unique_id=1354808655]
 offset_left = 10.0

@@ -7,7 +7,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	$NameTag.position = $ShipBody.position + Vector2(10,0)
+	$NameTag.position = $ShipBody.position + Vector2(15,0)
 	if $ShipBody.flags > 0:
 		if $NameTag.get_theme_color("font_color") != Color.RED: $NameTag.add_theme_color_override("font_color", Color.RED)
 	else:

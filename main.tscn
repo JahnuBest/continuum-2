@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bo2hg1dik3dwe" path="res://ship_data/bullets/bullet.tscn" id="2_272bh"]
 [ext_resource type="Script" uid="uid://cp40iwk3dj5w3" path="res://ship_data/health_bar.gd" id="5_7mycd"]
 [ext_resource type="PackedScene" uid="uid://r36bdcykw8tb" path="res://flag.tscn" id="5_lquwl"]
+[ext_resource type="PackedScene" uid="uid://1e45h8rh4xam" path="res://chat.tscn" id="6_272bh"]
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_7mycd"]
 scenes/1/scene = ExtResource("5_lquwl")
@@ -65,6 +66,17 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
+[node name="Chat" parent="MainCamera/MainUI" unique_id=2043146575 instance=ExtResource("6_272bh")]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -565.0
+offset_top = 121.0
+offset_right = -308.0
+offset_bottom = 276.0
+grow_vertical = 0
+
 [node name="HealthBar" type="ColorRect" parent="MainCamera/MainUI" unique_id=154542040]
 layout_mode = 1
 anchors_preset = -1
@@ -114,6 +126,14 @@ offset_right = 559.0
 offset_bottom = 309.5
 text = "FPS: "
 vertical_alignment = 1
+
+[node name="MenuUI" type="Control" parent="MainCamera" unique_id=151949689]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -200.0
+offset_top = -17.0
+offset_right = -160.0
+offset_bottom = 23.0
 
 [node name="TestWeapons" type="Path2D" parent="." unique_id=1182915021]
 visible = false

@@ -13,6 +13,10 @@ var current_bullet_data := preload("res://ship_data/bullets/bulletData/default_b
 var current_bomb_data := preload("res://ship_data/bullets/bulletData/default_bomb.tres")
 var current_mine_data := preload("res://ship_data/bullets/bulletData/default_mine.tres")
 
+var menu_open = false
+var Menu := preload("res://gamemenu.tscn")
+var menu : Node
+
 func _ready() -> void:
 	return
 	$TestWeapons/TestWeaponsTimer.start()
@@ -23,10 +27,25 @@ func _process(delta: float) -> void:
 	$MainCamera.position = $Ship.position + $Ship/ShipBody.position
 	velocityLabel.text = "Velocity: " + str(Vector2i($Ship/ShipBody.velocity))
 	healthLabel.text = str(int($Ship/ShipBody.health))
+	if $Ship/ShipBody.health < 500:
+		if healthLabel.get_theme_color("font_color") != Color.RED:
+			healthLabel.add_theme_color_override("font_color", Color.RED)
+	else:
+		if healthLabel.get_theme_color("font_color") != Color.WHITE:
+			healthLabel.add_theme_color_override("font_color", Color.WHITE)
 	fpsLabel.text = "FPS: " + str(int(Performance.get_monitor(Performance.TIME_FPS)))
 	positionLabel.text = "Position: " + str(Vector2i($Ship/ShipBody.position))
 	healthBar.set_health_bar_width($Ship/ShipBody.health, $Ship/ShipBody.max_health, delta)
-
+	if Input.is_action_just_pressed("menu") and not Globals.chat_open:
+		if not menu_open:
+			menu = Menu.instantiate()
+			#menu.position = Vector2(400, 500)
+			menu.z_index = RenderingServer.CANVAS_ITEM_Z_MAX # ALWAYS on top
+			$MainCamera/MenuUI.add_child(menu)
+		else:
+			menu.queue_free()
+			menu = null
+		menu_open = not menu_open
 
 func _on_test_weapons_timer_timeout() -> void:
 	return
